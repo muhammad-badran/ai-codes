@@ -47,8 +47,19 @@ def backtrackingSearch(problem):
   recurse(problem.startState(), history[], totalCost = 0)
   return (best['cost'], best['history'])
   
-  
-  
+def dynamicProgramming(problem):
+  cache = {} # state -> futureCost(state)
+            
+  def futureCost(state):
+     # Base Case
+     if problem.isEnd(state):
+        return 0
+     if state in cache:
+        return cache[state]
+     result = min (cost+futureCost(newState) \ for action, newState, cost in problem.succAndCost(state))
+     cache[state] = result
+     return result       
+  return (futureCost(problem.statState(), [])
   
   
   
